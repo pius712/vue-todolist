@@ -1,13 +1,13 @@
 <template>
-    <div class="inputBox">
+    <div class="inputBox shadow">
         <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo">
-        <!-- <button v-on:click="addTodo">add</button> -->
+       
         <span class="addContainer" v-on:click="addTodo" >
             <i class="fas fa-plus addBtn"></i>
         </span>
     </div>
 </template>
-
+ <!-- <button v-on:click="addTodo">add</button> -->
 <script>
 export default {
     data: function(){
@@ -46,13 +46,14 @@ input:focus{
 }
 .addContainer{
     float:right;
+    background:linear-gradient(to right, #6478FB, #8763FB );
     display: block;
     width:3rem;
     border-radius: 0 5px 0 5px;
 }
 .addBtn{
     /* display: block; */
-    /* color:white; */
+    color:white;
     vertical-align: middle;
 }
 </style>
