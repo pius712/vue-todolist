@@ -1,37 +1,36 @@
 <template>
-    <div class="inputBox shadow">
+    <div class="inputBox shadow"> 
         <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo">
-       
+        <!-- <button v-on:click="addTodo">add</button> -->
         <span class="addContainer" v-on:click="addTodo" >
             <i class="fas fa-plus addBtn"></i>
         </span>
     </div>
 </template>
- <!-- <button v-on:click="addTodo">add</button> -->
+
 <script>
 export default {
     data: function(){
-        return{
-            newTodoItem:""
+        return {
+            newTodoItem: ""
         }
     },
     methods:{
         addTodo: function(){
-            //  console.log(this.newTodoItem);
-             //저장하는 로직 
-             localStorage.setItem(this.newTodoItem, this.newTodoItem);
-             this.clearInput();
-        },
+            localStorage.setItem(this.newTodoItem, this.newTodoItem);
+            this.clearInput();
+          },
         clearInput: function(){
-            this.newTodoItem ="";
+            this.newTodoItem = "";
+        
         }
     }
 }
 </script>
 
-<style scope>
+<style scoped>
 input:focus{
-    outline:none;
+    outline: none;
 }
 .inputBox{
     background: white;
@@ -40,20 +39,18 @@ input:focus{
     border-radius: 5px;
 }
 .inputBox input{
-    /* display: block; */
     border-style: none;
     font-size: 0.9rem;
 }
 .addContainer{
-    float:right;
-    background:linear-gradient(to right, #6478FB, #8763FB );
+    float: right;
+    background: linear-gradient(to right, #6478FB, #8763FB);
     display: block;
-    width:3rem;
-    border-radius: 0 5px 0 5px;
-}
+    width: 3rem;
+    border-radius: 0 5px 5px 0;
+}   
 .addBtn{
-    /* display: block; */
-    color:white;
-    vertical-align: middle;
+    color: white;
+    vertical-align: midddle;
 }
 </style>
