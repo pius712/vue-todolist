@@ -1,7 +1,12 @@
 <template>
     <div>
         <ul>
-            <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class="shadow">{{ todoItem }}
+            <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow">
+                <!-- <i class="checkBtn fas fa-check" v-bind:class= "{checkBtnCompledted: todoItem.completed}" 
+                    v-on:click="toggleComplete(todoItem, index)"></i>   -->
+                <i class="checkBtn fas fa-check" v-bind:class= "{checkBtnCompledted: todoItem.completed}" 
+                    v-on:click="toggleComplete(todoItem, index)"></i>        
+                <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
                 <span class = "removeBtn" v-on:click="removeTodo(todoItem, index)">
                     <i class="fas fa-trash"></i>
                 </span>
@@ -15,30 +20,25 @@
 
 <script>
 export default {    
-    data: function(){
-        return {
-            todoItems: []
-        }
-    },
+    props: ['propsdata'],
     methods:{
-
         removeTodo: function(todoItem, index){
-            console.log(todoItem, index);
+            console.log(todoItem);
+            this.$emit('remove',todoItem,index);
+            
+        },
+        toggleComplete: function(todoItem, index){
+            // console.log(todoItem, index)
+            console.log('toggle');
+            this.$emit('toggle',todoItem, index);
+            
         }
     },
-    created: function(){
-        if(localStorage.length > 0){
-            for(var i=0; i<localStorage.length; i++){
-                this.todoItems.push(localStorage.key(i));
-                // console.log(localStorage.key(i));
-            }
-        }
-        console.log('created'); // instance 생성시 바로 불러지는 ..!!;
-    },
+    
 }
 </script>
 
-<style>
+<style scoped>
 ul {
   list-style-type: none;
   padding-left: 0px;
