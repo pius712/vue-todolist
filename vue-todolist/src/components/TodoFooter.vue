@@ -11,7 +11,7 @@ export default {
     methods:{
         clearTodo: function(){
             console.log("hi");
-            this.$emit('clearTodo');
+            this.$store.commit('clearAll');
         }
     }
 }

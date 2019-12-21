@@ -1,11 +1,13 @@
 <template>
   <div id="app">
-    <TodoHeader></TodoHeader>
-    <TodoInput v-on:addTodoItem = "addOneItem"></TodoInput>
+    <!-- <TodoInput v-on:addTodoItem = "addOneItem"></TodoInput> -->
     <!-- <TodoInput v-on:하위 컴포넌트에서 발생시킨 이벤트 이름 = "현재 컴포넌트의 메서드 명"></TodoInput> -->
-    <TodoList v-bind:propsdata = "todoItems" v-on:remove = "removeOneItem" v-on:toggle = "toggleOneItem"></TodoList>
     <!-- <TodoList v-bind:내려보낼 프롭스 속성 이름: "현재 위치의 컴포넌트 데이터 속성"></TodoList> -->
-    <TodoFooter v-on:clearTodo= "clearAll"></TodoFooter>
+    <!-- <TodoFooter v-on:clearTodo= "clearAll"></TodoFooter> -->
+    <TodoHeader></TodoHeader>
+    <TodoInput></TodoInput>
+    <TodoList></TodoList>
+    <TodoFooter></TodoFooter>
 
 
   </div>
@@ -36,42 +38,30 @@ export default {
     }
   },
   methods : {
-    addOneItem: function(todoItem){  //function의 인자는 위에 $emit()으로 보낸 인자 값이다. 
-        console.log("addOneItem");
-        var obj = {completed: false, item: todoItem};
-        console.log(obj);
-        localStorage.setItem(todoItem, JSON.stringify(obj));
-        this.todoItems.push(obj);
+    // addOneItem: function(todoItem){  //function의 인자는 위에 $emit()으로 보낸 인자 값이다. 
+    //     console.log("addOneItem");
+    //     var obj = {completed: false, item: todoItem};
+    //     console.log(obj);
+    //     localStorage.setItem(todoItem, JSON.stringify(obj));
+    //     this.todoItems.push(obj);
         
-    },
-    removeOneItem: function(todoItem, index){
-        localStorage.removeItem(todoItem.item);
-        this.todoItems.splice(index, 1);
-    },
-    toggleOneItem: function(todoItem, index){
-        todoItem.completed = !todoItem.completed;
-        localStorage.removeItem(todoItem.item);
-        localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
-    },
-    clearAll: function(){
-          localStorage.clear();
-          this.todoItems = [];
-    }
+    // },
+    // removeOneItem: function(todoItem, index){
+    //     localStorage.removeItem(todoItem.item);
+    //     this.todoItems.splice(index, 1);
+    // },
+    // toggleOneItem: function(todoItem, index){
+    //     todoItem.completed = !todoItem.completed;
+    //     localStorage.removeItem(todoItem.item);
+    //     localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+    // },
+    // clearAll: function(){
+    //       localStorage.clear();
+    //       this.todoItems = [];
+    // }
 
   },
-  created: function(){
-        if(localStorage.length > 0){
-            for(var i=0; i<localStorage.length; i++){
-                // this.todoItems.push(localStorage.key(i));
-                if(localStorage.key(i) == 'loglevel:webpack-dev-server'){
-                  continue;
-                }
-                this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-                // console.log(localStorage.key(i));
-            }
-        }
-        console.log('created'); // instance 생성시 바로 불러지는 ..!!;
-    },
+
   components:{
     'TodoHeader': TodoHeader,
     'TodoInput': TodoInput,
