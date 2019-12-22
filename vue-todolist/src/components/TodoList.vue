@@ -1,13 +1,21 @@
 <template>
     <div>
         <ul>
-            <li v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem.item" class="shadow">
+            <!-- <li v-for="(todoItem, index) in this.$store.getters.storedTodoItems" v-bind:key="todoItem.item" class="shadow"> -->
+            <!-- <li v-for="(todoItem, index) in this.todoItems" v-bind:key="todoItem.item" class="shadow"> -->
+            <li v-for="(todoItem, index) in this.storedTodoItems" v-bind:key="todoItem.item" class="shadow">
                 <!-- <i class="checkBtn fas fa-check" v-bind:class= "{checkBtnCompledted: todoItem.completed}" 
                     v-on:click="toggleComplete(todoItem, index)"></i>   -->
+                <!-- <i class="checkBtn fas fa-check" v-bind:class= "{checkBtnCompleted: todoItem.completed}" 
+                    v-on:click="toggleComplete(todoItem, index)"></i>         -->
                 <i class="checkBtn fas fa-check" v-bind:class= "{checkBtnCompleted: todoItem.completed}" 
-                    v-on:click="toggleComplete(todoItem, index)"></i>        
+                    v-on:click="toggleComplete({todoItem, index})"></i>        
                 <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
-                <span class = "removeBtn" v-on:click="removeTodo(todoItem, index)">
+                <!-- <span class = "removeBtn" v-on:click="removeTodo(todoItem, index)"> -->
+                <!-- 위의 경우에는 click시 helper함수 없이 아래의 methods를 거쳐서 commit을 해준것. 따라서 매개 변수 2개 전달 후
+                밑의 method 부분에서 객체화 하여 commit의 인자로 넘겼음. 하지만 아래의 경우에는 헬퍼 함수를 사용하여 바로 넘기기 때문에
+                인자를 객체화 해서 넘겨준다.  -->
+                <span class = "removeBtn" v-on:click="removeTodo({todoItem, index})">
                     <i class="fas fa-trash"></i>
                 </span>
             </li>
@@ -19,29 +27,43 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex';
+
 export default {    
     methods:{
-        removeTodo(todoItem, index){
-            console.log(todoItem);
-            console.log(index, 'hi');
-            // this.$emit('remove',todoItem,index);
-            this.$store.commit('removeOneItem',{
-              todoItem,
-              index
-            });
-        },
-        toggleComplete(todoItem, index){
-            // console.log(todoItem, index)
-            // console.log('toggle');
+        ...mapMutations({
+          removeTodo: 'removeOneItem',
+          toggleComplete: 'toggleOneItem'
+        }),
+        // removeTodo(todoItem, index){
+            // this.$emit('remove',todoItem,index);   // vuex 사용하기 전
 
-            // this.$emit('toggle',todoItem, index);            
-            this.$store.commit('toggleOneItem',{
-              todoItem,
-              index
-            });            
-            
-        }
+            // this.$store.commit('removeOneItem',{
+            //   todoItem,
+            //   index
+            // });   // helper 함수 사용하기 전.
+        // },
+        // ...mapMutations({
+        //   toggleComplete: 'toggleOneItem'
+        // }),
+        // toggleComplete(todoItem, index){
+        //     // this.$emit('toggle',todoItem, index);            
+        //     this.$store.commit('toggleOneItem',{
+        //       todoItem,
+        //       index
+        //     });            
+        // }
     },
+    computed:{
+      // todoItems(){
+      //   return this.$store.getters.storedTodoItems;
+      //   // 이 컴포넌트의 todoItems 속성에 return 값을 바인딩 한 것과 마찬가지. 
+      // }
+      ...mapGetters(['storedTodoItems']),
+      // ...mapGetters({
+      //   todoItems: 'storedTodoItems'
+      //   }) 
+    }
     
 }
 </script>

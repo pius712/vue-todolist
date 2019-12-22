@@ -32,12 +32,12 @@ import TodoFooter from './components/TodoFooter.vue'
 //   }
 // })
 export default {
-  data : function(){
-    return {
-        todoItems: []   
-    }
-  },
-  methods : {
+  // data : function(){
+  //   return {
+  //       todoItems: []   
+  //   }
+  // },
+  // methods : {
     // addOneItem: function(todoItem){  //function의 인자는 위에 $emit()으로 보낸 인자 값이다. 
     //     console.log("addOneItem");
     //     var obj = {completed: false, item: todoItem};
@@ -51,7 +51,7 @@ export default {
     //     this.todoItems.splice(index, 1);
     // },
     // toggleOneItem: function(todoItem, index){
-    //     todoItem.completed = !todoItem.completed;
+          // todoItem[index].completed = !todoItem[index].completed;
     //     localStorage.removeItem(todoItem.item);
     //     localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     // },
@@ -59,9 +59,7 @@ export default {
     //       localStorage.clear();
     //       this.todoItems = [];
     // }
-
-  },
-
+    // },
   components:{
     'TodoHeader': TodoHeader,
     'TodoInput': TodoInput,

@@ -33,6 +33,11 @@ export const store = new Vuex.Store({
     state: {
         todoItems: storage.fetch(),
     },
+    getters:{
+        storedTodoItems(state){
+            return state.todoItems;
+        }
+    },
     mutations:{
         addOneItem(state, todoItem){  //function의 인자는 위에 $emit()으로 보낸 인자 값이다. 
             console.log("addOneItem recevied");
@@ -41,7 +46,19 @@ export const store = new Vuex.Store({
             localStorage.setItem(todoItem, JSON.stringify(obj));
             // this.todoItems.push(obj);  
             state.todoItems.push(obj);
-            
+            // console.log(state.todoItems);
+            if(localStorage.length > 0){
+                for(var i=0; i<localStorage.length; i++){
+                    // this.todoItems.push(localStorage.key(i));
+                    if(localStorage.key(i) !== 'loglevel:webpack-dev-server'){
+                        console.log(localStorage.key(i));
+                    //   continue;
+                    }
+                    // console.log(JSON.parse(localStorage.getItem(localStorage.key(i))), i);
+                    // arr.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
+                    // console.log(localStorage.key(i));
+                }
+            }
         },
         removeOneItem: function(state, payload){
             console.dir(payload);
@@ -50,7 +67,7 @@ export const store = new Vuex.Store({
             },
         toggleOneItem: function(state, payload){
             console.dir(payload);
-            payload.todoItem.completed = !payload.todoItem.completed;
+            state.todoItems[payload.index].completed = !state.todoItems[payload.index].completed;
             localStorage.removeItem(payload.todoItem.item);
             localStorage.setItem(payload.todoItem.item, JSON.stringify(payload.todoItem));
         },
