@@ -15,17 +15,25 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 export default {
-    props:['propsdata'],
+    // props:['propsdata'],
+    computed: {
+        propsdata(){
+            return this.$store.state.todoItem;
+        }
+    },
     methods:{
         toggleItme(){
 
         },
-        deleteItem(idx){
-            // var idx = this.tod
-            console.log(idx);
-            this.$emit('delete', idx);
-        }
+        ...mapMutations(['deleteItem']),
+        // deleteItem(idx){
+        //     // var idx = this.tod
+        //     this.$store.commit('deleteItem',idx);
+        //     // console.log(idx);
+        //     // this.$emit('delete', idx);
+        // }
     }
 }
 </script>

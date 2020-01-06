@@ -1,8 +1,8 @@
 <template>
     <div class="todo-input">
-        <input type="text" v-model="inputItem" v-on:keyup.enter="addTodo">
+        <input type="text" v-model="inputItem" v-on:keyup.enter="addTodo(inputItem)">
         <!-- <div class="todo-confirm"> -->
-            <button class="confirm-container" v-on:click="addTodo">
+            <button class="confirm-container" v-on:click="addTodo(inputItem)">
                 <i class="fas fa-plus"></i>
             </button>
         <!-- </div> -->
@@ -11,6 +11,7 @@
 </template>
 
 <script>
+// import { mapMutations } from 'vuex';
 export default {
     data(){
         return {    
@@ -18,9 +19,11 @@ export default {
         }
     },
     methods:{
+        // ...mapMutations(['addTodo']),
         addTodo(){
-            console.log("hello");
-            this.$emit("addOneItem", this.inputItem);
+            // console.log("hello");
+            this.$store.commit("addTodo", this.inputItem);
+            // this.$emit("addOneItem", this.inputItem);
             this.inputItem = '';
         }
     }

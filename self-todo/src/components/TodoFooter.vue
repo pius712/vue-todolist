@@ -1,13 +1,16 @@
 <template>
-  <div class="list-clear" v-on:click="clearAll">Clear All</div>
+  <div class="list-clear" v-on:click="clearAllItem">Clear All</div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 export default {
     methods:{
-        clearAll(){
-            this.$emit('clear');
-        }
+        ...mapMutations(['clearAllItem'])
+        // clearAll(){
+        //     this.$store.commit('clearAllItem');
+        //     // this.$emit('clear');
+        // }
     }
 }
 </script>
