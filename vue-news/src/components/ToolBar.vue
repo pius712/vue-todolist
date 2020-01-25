@@ -20,6 +20,6 @@ export default {};
 
 .header a {
   color: inherit;
-  text-decoration: none;
+  /* text-decoration: none; */
 }
 </style>

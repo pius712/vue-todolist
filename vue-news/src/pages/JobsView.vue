@@ -1,30 +1,85 @@
 <template>
   <div>
-    <div v-for="(job, idx) in jobs" :key="idx">
+    <list-item :items="jobs"></list-item>
+    <!-- <ul class="news-list">
+      <li v-for="(job, idx) in jobs" :key="idx" class="post">
+        <div class="points">
+          {{ job.points || 0 }}
+        </div>
+        <div>
+          <p class="news-title">
+            <a :href="job.url">{{ job.title }}</a>
+          </p>
+          <small class="link-text">
+            {{ job.time_ago }} by
+            <a :href="job.url" class="link-text">{{ job.domain }} </a>
+          </small>
+        </div>
+      </li>
+    </ul> -->
+    <!-- <div v-for="(job, idx) in jobs" :key="idx">
       <a :href="job.url">{{ job.title }}</a>
       <small>{{ job.domain }}</small>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
+import ListItem from '../components/ListItem';
 import { mapState, mapActions } from 'vuex';
 export default {
-  data() {
-    return {};
+  components: {
+    ListItem,
   },
   computed: {
     jobs() {
       return this.$store.state.jobs;
     },
   },
-  methods: {
-    // ...mapActions(['FETCH_JOBS']),
-  },
   created() {
     this.$store.dispatch('FETCH_JOBS');
   },
+  // data() {
+  //   return {};
+  // },
+  // computed: {
+  //   jobs() {
+  //     return this.$store.state.jobs;
+  //   },
+  // },
+  // methods: {
+  //   // ...mapActions(['FETCH_JOBS']),
+  // },
+  // created() {
+  //   this.$store.dispatch('FETCH_JOBS');
+  // },
 };
 </script>
 
-<style></style>
+<style scoped>
+.news-list {
+  margin: 0;
+  padding: 0;
+}
+.post {
+  list-style: none;
+  display: flex;
+  border-bottom: 1px solid gray;
+  align-items: center;
+}
+.news-title {
+  /* width: 80px; */
+  margin: 0;
+}
+.points {
+  width: 80px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #41b883;
+}
+.link-text {
+  color: gray;
+}
+</style>

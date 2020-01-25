@@ -11,6 +11,13 @@ export default new Vuex.Store({
     news: [],
     jobs: [],
     ask: [],
+    user: {},
+    item: null,
+  },
+  getters: {
+    fetchedItem(state) {
+      return state.item;
+    },
   },
   mutations,
   actions,
