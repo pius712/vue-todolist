@@ -9,6 +9,7 @@ const config = {
 function fetchNewsList() {
   // return axios.get('https://api.hnpwa.com/v0/news/1.json');
   // --> 아래와 같이 공통된 부분을 빼서 다른 변수로 뺄 수 있다.
+  console.log('api call');
   return axios.get(`${config.baseUrl}news/1.json`);
 }
 

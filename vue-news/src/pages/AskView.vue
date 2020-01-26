@@ -18,30 +18,43 @@
           </small>
         </div>
       </li>
-    </ul> -->
+    </ul>-->
 
     <!-- <div v-for="(el, idx) in ask" :key="idx">
       <router-link :to="`/item/${el.id}`">{{ el.title }}</router-link>
       <small>{{ el.user }}</small>
-    </div> -->
+    </div>-->
   </div>
 </template>
 
 <script>
-import ListItem from '../components/ListItem';
-import { mapState } from 'vuex';
+import ListItem from "../components/ListItem";
+import bus from "../utils/bus";
+import { mapState } from "vuex";
 export default {
   components: {
-    ListItem,
+    ListItem
   },
   computed: {
     ask() {
       return this.$store.state.ask;
-    },
+    }
   },
   created() {
-    this.$store.dispatch('FETCH_ASK');
-  },
+    // this.$store.dispatch('FETCH_ASK');
+    bus.$emit("start:spinner");
+    setTimeout(() => {
+      this.$store
+        .dispatch("FETCH_ASK")
+        .then(() => {
+          console.log("fetched?");
+          bus.$emit("end:spinner");
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }, 3000);
+  }
   // data() {
   //   return {};
   // },

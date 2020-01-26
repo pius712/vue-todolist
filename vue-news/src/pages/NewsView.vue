@@ -7,26 +7,41 @@
         {{ item.time_ago }} by
         <router-link :to="`/user/${item.user}`">{{ item.user }}</router-link>
       </small>
-    </div> -->
+    </div>-->
   </div>
 </template>
 
 <script>
-import ListItem from '../components/ListItem.vue';
+import ListItem from "../components/ListItem.vue";
+import bus from "../utils/bus.js";
 // import axios from 'axios';
 export default {
   // 페이지 역할을 하는 컴포넌트는 비즈니스 로직이 들어가는 것은 좋지 않다.
   components: {
-    ListItem,
+    ListItem
   },
   computed: {
     news() {
       return this.$store.state.news;
-    },
+    }
   },
   created() {
-    this.$store.dispatch('FETCH_NEWS');
-  },
+    bus.$emit("start:spinner");
+    // setTimeout(() => {
+
+    // }, 3000);
+    this.$store
+      .dispatch("FETCH_NEWS")
+      .then(result => {
+        bus.$emit("end:spinner");
+        console.log("result");
+        console.log(result);
+        return result;
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
 };
 </script>
 

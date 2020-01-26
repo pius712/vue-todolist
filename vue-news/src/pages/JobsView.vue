@@ -16,29 +16,42 @@
           </small>
         </div>
       </li>
-    </ul> -->
+    </ul>-->
     <!-- <div v-for="(job, idx) in jobs" :key="idx">
       <a :href="job.url">{{ job.title }}</a>
       <small>{{ job.domain }}</small>
-    </div> -->
+    </div>-->
   </div>
 </template>
 
 <script>
-import ListItem from '../components/ListItem';
-import { mapState, mapActions } from 'vuex';
+import ListItem from "../components/ListItem";
+import bus from "../utils/bus.js";
+import { mapState, mapActions } from "vuex";
 export default {
   components: {
-    ListItem,
+    ListItem
   },
   computed: {
     jobs() {
       return this.$store.state.jobs;
-    },
+    }
   },
   created() {
-    this.$store.dispatch('FETCH_JOBS');
-  },
+    // this.$store.dispatch('FETCH_JOBS');
+    bus.$emit("start:spinner");
+    setTimeout(() => {
+      this.$store
+        .dispatch("FETCH_JOBS")
+        .then(() => {
+          console.log("fetched?");
+          bus.$emit("end:spinner");
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }, 3000);
+  }
   // data() {
   //   return {};
   // },
