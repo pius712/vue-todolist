@@ -1,6 +1,6 @@
 <template>
   <div>
-    <list-item :items="jobs"></list-item>
+    <list-item :items="list"></list-item>
     <!-- <ul class="news-list">
       <li v-for="(job, idx) in jobs" :key="idx" class="post">
         <div class="points">
@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     jobs() {
-      return this.$store.state.jobs;
+      return this.$store.state.list;
     }
   },
   created() {

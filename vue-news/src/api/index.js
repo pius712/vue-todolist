@@ -21,12 +21,17 @@ function fetchAskList() {
   return axios.get(`${config.baseUrl}ask/1.json`);
 }
 
+function fetchList(pageName) {
+  return axios.get(`${config.baseUrl}${pageName}/1.json`);
+}
+
 function fetchUserList(username) {
   return axios.get(`${config.baseUrl}user/${username}.json`);
 }
 function fetchItemList(itemNumber) {
   return axios.get(`${config.baseUrl}item/${itemNumber}.json`);
 }
+
 // fetchNewsList()
 //  .then()
 //  .catch()
@@ -37,6 +42,7 @@ export {
   fetchAskList,
   fetchUserList,
   fetchItemList,
+  fetchList,
 };
 
 // 이런식으로 작성을 하지 않으면, 여러 컴포넌트에서 axios를 사용할 때, 계속 라이브러리를 import 해주어야 한다.

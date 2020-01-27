@@ -4,11 +4,12 @@ import {
   fetchAskList,
   fetchUserList,
   fetchItemList,
+  fetchList,
 } from '../api/index';
 
 export default {
   FETCH_NEWS(context) {
-    return fetchNewsList()
+    fetchNewsList()
       .then(res => {
         context.commit('SET_NEWS', res.data);
         console.log('actions');
@@ -50,6 +51,15 @@ export default {
     return fetchItemList(payload)
       .then(res => {
         commit('SET_ITEM', res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  },
+  FETCH_LIST({ commit }, pageName) {
+    fetchList(pageName)
+      .then(res => {
+        commit('SET_LIST', res.data);
       })
       .catch(err => {
         console.error(err);

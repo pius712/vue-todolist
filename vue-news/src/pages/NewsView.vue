@@ -22,26 +22,26 @@ export default {
   },
   computed: {
     news() {
-      return this.$store.state.news;
+      return this.$store.state.list;
     }
-  },
-  created() {
-    bus.$emit("start:spinner");
-    // setTimeout(() => {
-
-    // }, 3000);
-    this.$store
-      .dispatch("FETCH_NEWS")
-      .then(result => {
-        bus.$emit("end:spinner");
-        console.log("result");
-        console.log(result);
-        return result;
-      })
-      .catch(err => {
-        console.error(err);
-      });
   }
+  // created() {
+  //   bus.$emit("start:spinner");
+  //   // setTimeout(() => {
+
+  //   // }, 3000);
+  //   this.$store
+  //     .dispatch("FETCH_NEWS")
+  //     .then(result => {
+  //       bus.$emit("end:spinner");
+  //       console.log("result");
+  //       console.log(result);
+  //       return result;
+  //     })
+  //     .catch(err => {
+  //       console.error(err);
+  //     });
+  // }
 };
 </script>
 

@@ -5,7 +5,7 @@ import AskView from '../pages/AskView.vue';
 import JobsView from '../pages/JobsView.vue';
 import ItemView from '../pages/ItemView.vue';
 import UserView from '../pages/UserView.vue';
-
+import createListView from '../pages/CreateListView';
 Vue.use(VueRouter);
 export const router = new VueRouter({
   mode: 'history',
@@ -18,15 +18,21 @@ export const router = new VueRouter({
     },
     {
       path: '/news',
-      component: NewsView,
+      name: 'news',
+      // component: NewsView,
+      component: createListView('NewsView'),
     },
     {
       path: '/ask',
-      component: AskView,
+      name: 'ask',
+      // component: AskView,
+      component: createListView('AskView'),
     },
     {
       path: '/jobs',
-      component: JobsView,
+      name: 'jobs',
+      // component: JobsView,
+      component: createListView('JobsView'),
     },
     {
       path: '/user/:id',

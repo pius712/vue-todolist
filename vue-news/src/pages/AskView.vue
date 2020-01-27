@@ -1,6 +1,6 @@
 <template>
   <div>
-    <list-item :items="ask"></list-item>
+    <list-item :items="list"></list-item>
     <!-- <ul class="news-list">
       <li v-for="(el, idx) in ask" :key="idx" class="post">
         <div class="points">
@@ -37,7 +37,7 @@ export default {
   },
   computed: {
     ask() {
-      return this.$store.state.ask;
+      return this.$store.state.list;
     }
   },
   created() {

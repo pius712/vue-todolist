@@ -13,6 +13,7 @@ export default new Vuex.Store({
     ask: [],
     user: {},
     item: null,
+    list: [],
   },
   getters: {
     fetchedItem(state) {
