@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ListView">
     <list-item :items="list"></list-item>
   </div>
 </template>

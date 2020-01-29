@@ -30,30 +30,30 @@
 <script>
 import ListItem from "../components/ListItem";
 import bus from "../utils/bus";
+import ListMixin from "../mixins/ListMixin";
 import { mapState } from "vuex";
 export default {
   components: {
     ListItem
   },
   computed: {
-    ask() {
+    list() {
       return this.$store.state.list;
     }
   },
+  // mixins: [ListMixin]
   created() {
     // this.$store.dispatch('FETCH_ASK');
     bus.$emit("start:spinner");
-    setTimeout(() => {
-      this.$store
-        .dispatch("FETCH_ASK")
-        .then(() => {
-          console.log("fetched?");
-          bus.$emit("end:spinner");
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    }, 3000);
+    this.$store
+      .dispatch("FETCH_LIST", this.$route.name)
+      .then(() => {
+        console.log("fetched?");
+        bus.$emit("end:spinner");
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
   // data() {
   //   return {};

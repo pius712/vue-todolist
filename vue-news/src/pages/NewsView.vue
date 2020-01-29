@@ -1,6 +1,6 @@
 <template>
   <div>
-    <list-item :items="news"></list-item>
+    <list-item :items="list"></list-item>
     <!-- <div v-for="(item, index) in this.$store.state.news" :key="index">
       <a :href="item.url">{{ item.title }}</a>
       <small>
@@ -14,17 +14,22 @@
 <script>
 import ListItem from "../components/ListItem.vue";
 import bus from "../utils/bus.js";
+import ListMixin from "../mixins/ListMixin";
 // import axios from 'axios';
 export default {
   // 페이지 역할을 하는 컴포넌트는 비즈니스 로직이 들어가는 것은 좋지 않다.
   components: {
     ListItem
   },
-  computed: {
-    news() {
-      return this.$store.state.list;
-    }
-  }
+  // computed: {
+  //   list() {
+  //     return this.$store.state.list;
+  //   }
+  // }
+  mounted() {
+    // bus.$emit("end:spinner");
+  },
+  mixins: [ListMixin]
   // created() {
   //   bus.$emit("start:spinner");
   //   // setTimeout(() => {

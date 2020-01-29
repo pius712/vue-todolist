@@ -27,31 +27,37 @@
 <script>
 import ListItem from "../components/ListItem";
 import bus from "../utils/bus.js";
+import ListMixin from "../mixins/ListMixin";
 import { mapState, mapActions } from "vuex";
 export default {
   components: {
     ListItem
   },
-  computed: {
-    jobs() {
-      return this.$store.state.list;
-    }
+  // computed: {
+  //   list() {
+  //     return this.$store.state.list;
+  //   }
+  // },
+  mounted() {
+    console.log("end spinner");
+    bus.$emit("end:spinner");
   },
-  created() {
-    // this.$store.dispatch('FETCH_JOBS');
-    bus.$emit("start:spinner");
-    setTimeout(() => {
-      this.$store
-        .dispatch("FETCH_JOBS")
-        .then(() => {
-          console.log("fetched?");
-          bus.$emit("end:spinner");
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    }, 3000);
-  }
+  mixins: [ListMixin]
+  // created() {
+  //   // this.$store.dispatch('FETCH_JOBS');
+  //   bus.$emit("start:spinner");
+  //   setTimeout(() => {
+  //     this.$store
+  //       .dispatch("FETCH_JOBS")
+  //       .then(() => {
+  //         console.log("fetched?");
+  //         bus.$emit("end:spinner");
+  //       })
+  //       .catch(err => {
+  //         console.error(err);
+  //       });
+  //   }, 3000);
+  // }
   // data() {
   //   return {};
   // },

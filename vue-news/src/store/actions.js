@@ -57,9 +57,11 @@ export default {
       });
   },
   FETCH_LIST({ commit }, pageName) {
-    fetchList(pageName)
+    return fetchList(pageName)
       .then(res => {
         commit('SET_LIST', res.data);
+        console.log('actions');
+        return res;
       })
       .catch(err => {
         console.error(err);
