@@ -12,14 +12,14 @@ export default new Vuex.Store({
     jobs: [],
     ask: [],
     user: {},
-    item: null,
+    items: null,
     list: [],
   },
-  getters: {
-    fetchedItem(state) {
-      return state.item;
-    },
-  },
+  // getters: {
+  //   fetchedItem(state) {
+  //     return state.item;
+  //   },
+  // },
   mutations,
   actions,
   //   mutations: mutations,

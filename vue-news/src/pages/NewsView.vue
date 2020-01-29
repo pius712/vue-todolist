@@ -21,32 +21,7 @@ export default {
   components: {
     ListItem
   },
-  // computed: {
-  //   list() {
-  //     return this.$store.state.list;
-  //   }
-  // }
-  mounted() {
-    // bus.$emit("end:spinner");
-  },
   mixins: [ListMixin]
-  // created() {
-  //   bus.$emit("start:spinner");
-  //   // setTimeout(() => {
-
-  //   // }, 3000);
-  //   this.$store
-  //     .dispatch("FETCH_NEWS")
-  //     .then(result => {
-  //       bus.$emit("end:spinner");
-  //       console.log("result");
-  //       console.log(result);
-  //       return result;
-  //     })
-  //     .catch(err => {
-  //       console.error(err);
-  //     });
-  // }
 };
 </script>
 

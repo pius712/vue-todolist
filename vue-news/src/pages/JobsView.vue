@@ -33,45 +33,11 @@ export default {
   components: {
     ListItem
   },
-  // computed: {
-  //   list() {
-  //     return this.$store.state.list;
-  //   }
-  // },
   mounted() {
     console.log("end spinner");
     bus.$emit("end:spinner");
   },
   mixins: [ListMixin]
-  // created() {
-  //   // this.$store.dispatch('FETCH_JOBS');
-  //   bus.$emit("start:spinner");
-  //   setTimeout(() => {
-  //     this.$store
-  //       .dispatch("FETCH_JOBS")
-  //       .then(() => {
-  //         console.log("fetched?");
-  //         bus.$emit("end:spinner");
-  //       })
-  //       .catch(err => {
-  //         console.error(err);
-  //       });
-  //   }, 3000);
-  // }
-  // data() {
-  //   return {};
-  // },
-  // computed: {
-  //   jobs() {
-  //     return this.$store.state.jobs;
-  //   },
-  // },
-  // methods: {
-  //   // ...mapActions(['FETCH_JOBS']),
-  // },
-  // created() {
-  //   this.$store.dispatch('FETCH_JOBS');
-  // },
 };
 </script>
 

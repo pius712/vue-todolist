@@ -39,18 +39,8 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      fetchedItem: null
+      fetchedItem: this.$store.state.items
     };
-  },
-  // computed: {
-  //   ...mapGetters(["fetchedItem"])
-  // },
-  created() {
-    const itemNumber = this.$route.params.id;
-    // console.log('itemNumber', itemNumber);
-    this.$store.dispatch("FETCH_ITEM", itemNumber).then(() => {
-      this.fetchedItem = this.$store.state.item;
-    });
   },
   components: {
     UserProfile

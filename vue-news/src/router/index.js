@@ -37,34 +37,16 @@ export const router = new VueRouter({
             console.error(err);
           });
       },
-      // component: createListView('NewsView'),
     },
     {
       path: '/ask',
       name: 'ask',
       component: AskView,
-      // beforeEnter: (to, from, next) => {
-      //   console.log('beforeEnter');
-      //   // bus.$emit('start:spinner');
-      //   store
-      //     .dispatch('FETCH_LIST', to.name)
-      //     .then(result => {
-      //       console.log('result');
-      //       console.log(result);
-      //       // bus.$emit('end:spinner');
-      //       next();
-      //     })
-      //     .catch(err => {
-      //       console.error(err);
-      //     });
-      // },
-      // component: createListView('AskView'),
     },
     {
       path: '/jobs',
       name: 'jobs',
       component: JobsView,
-      // component: createListView('JobsView'),
       beforeEnter: (to, from, next) => {
         console.log('beforeEnter');
         bus.$emit('start:spinner');
@@ -73,7 +55,6 @@ export const router = new VueRouter({
           .then(result => {
             console.log('result');
             console.log(result);
-            // bus.$emit('end:spinner');
             next();
           })
           .catch(err => {
@@ -88,6 +69,20 @@ export const router = new VueRouter({
     {
       path: '/item/:id',
       component: ItemView,
+      beforeEnter: (to, from, next) => {
+        console.log(to);
+        const itemNumber = to.params.id;
+        store
+          .dispatch('FETCH_ITEM', itemNumber)
+          .then(res => {
+            console.log('router');
+            console.log(store.state.items);
+            next();
+          })
+          .catch(() => {
+            next('/');
+          });
+      },
     },
   ],
 });
