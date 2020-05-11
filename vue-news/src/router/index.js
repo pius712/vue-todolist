@@ -50,7 +50,7 @@ export const router = new VueRouter({
       beforeEnter: (to, from, next) => {
         console.log('beforeEnter');
         bus.$emit('start:spinner');
-        return store
+        store
           .dispatch('FETCH_LIST', to.name)
           .then(result => {
             console.log('result');
