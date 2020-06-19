@@ -4,7 +4,7 @@
 			<form class="form" @submit.prevent="submitForm">
 				<div>
 					<label>id: </label>
-					<input type="text" v-model="userId" />
+					<input id="username" type="text" v-model="userId" />
 				</div>
 				<div>
 					<label>password: </label>
@@ -24,8 +24,9 @@
 </template>
 
 <script>
-import { loginUser } from '@/api/index.js';
+// import { loginUser } from '@/api/index.js';
 import { validateEmail } from '@/utils/validation';
+// import { saveAuthToCookie, saveUserToCookie } from '@/utils/cookies';
 export default {
 	data() {
 		return {
@@ -46,11 +47,15 @@ export default {
 					username: this.userId,
 					password: this.password,
 				};
-				const { data } = await loginUser(userData);
-				console.log(data);
-				// this.logMsg = `${data.user.username}님 안녕하세요.`;
-				this.$store.commit('setToken', data.token);
-				this.$store.commit('setUsername', data.user.username);
+				console.log(userData);
+				await this.$router.dispatch('LOGIN', userData);
+				// const { data } = await loginUser(userData);
+				// console.log(data);
+				// // this.logMsg = `${data.user.username}님 안녕하세요.`;
+				// this.$store.commit('setToken', data.token);
+				// this.$store.commit('setUsername', data.user.username);
+				// saveAuthToCookie(data.token);
+				// saveUserToCookie(data.user.username);
 				this.$router.push('/main');
 				// this.initForm();
 			} catch (error) {

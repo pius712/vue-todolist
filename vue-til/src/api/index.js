@@ -1,10 +1,23 @@
 import axios from 'axios';
 // import store from '@/store/index';
 import setInterceptors from '@/api/common/interceptors';
-
-function initInstance() {
+import { loginUser, registerUser } from '@/api/auth';
+import {
+	fetchPosts,
+	createPost,
+	deletePost,
+	fetchOnePost,
+	editPost,
+} from '@/api/posts';
+function createInstance() {
 	const instance = axios.create({
 		baseURL: 'http://localhost:3000',
+	});
+	return instance;
+}
+function createInstanceWithAuth(url) {
+	const instance = axios.create({
+		baseURL: `http://localhost:3000/${url}/`,
 		// headers: {
 		// 	Authorization: store.state.token,
 		// },
@@ -14,18 +27,16 @@ function initInstance() {
 
 	return newInstance;
 }
-const instance = initInstance();
-export const registerUser = userData => {
-	// const url = 'http://localhost:3000/signup';
-	// return axios.post(url, userData);
-	return instance.post('signup', userData);
-};
+export const instance = createInstance();
 
-export const loginUser = userData => {
-	return instance.post('login', userData);
-};
+export const posts = createInstanceWithAuth('posts');
 
-// 학습 노트 데이터 조회
-export function fetchPosts() {
-	return instance.get('posts');
-}
+export {
+	registerUser,
+	loginUser,
+	fetchPosts,
+	createPost,
+	deletePost,
+	fetchOnePost,
+	editPost,
+};
